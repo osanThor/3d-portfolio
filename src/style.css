@@ -1,0 +1,221 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f2ee;
+  --text: #121212;
+  --muted: #67635d;
+  --panel: rgba(255, 255, 255, 0.58);
+  --line: rgba(18, 18, 18, 0.12);
+  --button-bg: #121212;
+  --button-text: #ffffff;
+  --button-ghost-bg: rgba(18, 18, 18, 0.06);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #090a0f;
+  --text: #f3f0ea;
+  --muted: #aaa39a;
+  --panel: rgba(12, 14, 22, 0.58);
+  --line: rgba(255, 255, 255, 0.13);
+  --button-bg: #f3f0ea;
+  --button-text: #090a0f;
+  --button-ghost-bg: rgba(255, 255, 255, 0.08);
+  --shadow: 0 24px 90px rgba(0, 0, 0, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--bg);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 80% 16%, rgba(129, 140, 248, 0.18), transparent 34rem),
+    radial-gradient(circle at 16% 80%, rgba(20, 184, 166, 0.14), transparent 28rem),
+    var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 280ms ease, color 280ms ease;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: '';
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black, transparent 72%);
+  opacity: 0.42;
+}
+
+#webgl {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.page-shell {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 28px clamp(20px, 5vw, 72px);
+  pointer-events: none;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+.brand,
+.theme-toggle,
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.theme-toggle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.theme-toggle__icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 680px;
+  min-height: calc(100vh - 104px);
+  padding: clamp(48px, 12vh, 120px) 0;
+  pointer-events: auto;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: clamp(0.78rem, 1.6vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(4.2rem, 13vw, 9.8rem);
+  line-height: 0.84;
+  letter-spacing: -0.09em;
+}
+
+.description {
+  max-width: 520px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.7;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.link-button {
+  min-width: 132px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 0.94rem;
+  font-weight: 750;
+  transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.link-button--ghost {
+  background: var(--button-ghost-bg);
+  color: var(--text);
+}
+
+.link-button:hover,
+.theme-toggle:hover,
+.brand:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 760px) {
+  .page-shell {
+    padding: 20px;
+  }
+
+  .hero {
+    min-height: calc(100vh - 88px);
+    text-align: left;
+  }
+
+  .description {
+    max-width: 22rem;
+  }
+
+  .links {
+    margin-top: 28px;
+  }
+
+  .link-button {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Minimal 3D portfolio landing page" />
+    <title>Minimal 3D Portfolio</title>
+  </head>
+  <body>
+    <canvas id="webgl" aria-hidden="true"></canvas>
+
+    <main class="page-shell">
+      <header class="top-bar">
+        <a class="brand" href="#" aria-label="Home">JY</a>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <span class="theme-toggle__icon">☾</span>
+        </button>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Frontend Developer</p>
+        <h1 id="hero-title">Junyoung Lee</h1>
+        <p class="description">
+          Building clean, interactive web experiences with TypeScript, 3D interaction, and thoughtful UI engineering.
+        </p>
+
+        <nav class="links" aria-label="External links">
+          <a class="link-button" href="https://portfolio.example.com" target="_blank" rel="noreferrer">Portfolio</a>
+          <a class="link-button link-button--ghost" href="https://blog.example.com" target="_blank" rel="noreferrer">Blog</a>
+        </nav>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
