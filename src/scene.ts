@@ -319,7 +319,7 @@ export class PortfolioScene {
     context.fillStyle = palette.textMuted;
     context.font = '600 46px Inter, Arial, sans-serif';
     context.fillText('Frontend Developer', 132, 1110);
-    context.fillText('TypeScript / Three.js', 132, 1184);
+    context.fillText('안녕하세용ㅎ', 132, 1184);
 
     context.fillStyle = palette.textLine;
     context.fillRect(132, 1268, 188, 8);
