@@ -5,6 +5,7 @@ import { applyTheme, getInitialTheme, toggleTheme, type Theme } from './theme';
 const canvas = document.querySelector<HTMLCanvasElement>('#webgl');
 const themeToggle = document.querySelector<HTMLButtonElement>('#theme-toggle');
 const themeIcon = document.querySelector<HTMLSpanElement>('.theme-toggle__icon');
+const startupSplash = document.querySelector<HTMLDivElement>('#startup-splash');
 
 if (!canvas) {
   throw new Error('WebGL canvas was not found.');
@@ -16,6 +17,15 @@ applyTheme(currentTheme);
 const scene = new PortfolioScene(canvas, currentTheme);
 scene.start();
 
+function revealApp(): void {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add('theme-ready');
+      startupSplash?.setAttribute('aria-hidden', 'true');
+    });
+  });
+}
+
 function syncThemeIcon(theme: Theme): void {
   if (!themeIcon) return;
   themeIcon.textContent = theme === 'dark' ? '☀' : '☾';
@@ -24,6 +34,7 @@ function syncThemeIcon(theme: Theme): void {
 }
 
 syncThemeIcon(currentTheme);
+revealApp();
 
 themeToggle?.addEventListener('click', () => {
   currentTheme = toggleTheme(currentTheme);

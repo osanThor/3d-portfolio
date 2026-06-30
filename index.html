@@ -7,6 +7,124 @@
       name="description"
       content="프론트엔드 개발자 준영의 사이트에 오신 것을 환영합니다."
     />
+    <script>
+      (() => {
+        const storageKey = 'minimal-3d-portfolio-theme';
+        const savedTheme = window.localStorage.getItem(storageKey);
+        const theme =
+          savedTheme === 'light' || savedTheme === 'dark'
+            ? savedTheme
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <style>
+      html {
+        background: #f7f8fb;
+      }
+
+      html[data-theme='dark'] {
+        background: #08090d;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      html:not(.theme-ready) body {
+        overflow: hidden;
+      }
+
+      html:not(.theme-ready) #webgl,
+      html:not(.theme-ready) .page-shell {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .startup-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at top, rgba(92, 72, 154, 0.14), transparent 42%),
+          linear-gradient(180deg, rgba(41, 173, 156, 0.08), transparent 48%),
+          #f7f8fb;
+        color: #141820;
+        transition:
+          opacity 220ms ease,
+          visibility 220ms ease;
+      }
+
+      html[data-theme='dark'] .startup-splash {
+        background:
+          radial-gradient(circle at top, rgba(92, 72, 154, 0.2), transparent 42%),
+          linear-gradient(180deg, rgba(41, 173, 156, 0.12), transparent 48%),
+          #08090d;
+        color: #f4f1ea;
+      }
+
+      html.theme-ready .startup-splash {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .startup-splash__inner {
+        display: grid;
+        gap: 12px;
+        justify-items: center;
+        text-align: center;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      .startup-splash__spinner {
+        width: 42px;
+        height: 42px;
+        border: 2px solid rgba(20, 24, 32, 0.14);
+        border-top-color: currentColor;
+        border-radius: 999px;
+        animation: splash-spin 900ms linear infinite;
+      }
+
+      html[data-theme='dark'] .startup-splash__spinner {
+        border-color: rgba(255, 255, 255, 0.14);
+        border-top-color: currentColor;
+      }
+
+      .startup-splash__label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      @keyframes splash-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <noscript>
+      <style>
+        html:not(.theme-ready) #webgl,
+        html:not(.theme-ready) .page-shell {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+
+        .startup-splash {
+          display: none;
+        }
+      </style>
+    </noscript>
     <title>개발자 준영 | GIVEN LOG</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -54,6 +172,13 @@
     <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
+    <div class="startup-splash" id="startup-splash" role="status" aria-live="polite">
+      <div class="startup-splash__inner">
+        <div class="startup-splash__spinner" aria-hidden="true"></div>
+        <div class="startup-splash__label">Applying theme</div>
+      </div>
+    </div>
+
     <canvas id="webgl" aria-hidden="true"></canvas>
 
     <main class="page-shell">
