@@ -562,7 +562,7 @@ export class PortfolioScene {
   };
 
   private disposeSceneResources(): void {
-    this.scene.traverse((object) => {
+    this.scene.traverse((object: THREE.Object3D) => {
       if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.LineSegments) {
         object.geometry.dispose();
       }
