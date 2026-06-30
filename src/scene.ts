@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import type { Theme } from './theme';
+import * as THREE from "three";
+import type { Theme } from "./theme";
 
 interface PointerState {
   x: number;
@@ -56,9 +56,9 @@ const THEME_COLORS = {
     keyIntensity: 2.55,
     accentIntensity: 1.75,
     rimIntensity: 1.4,
-    text: 'rgba(18, 22, 31, 0.86)',
-    textMuted: 'rgba(18, 22, 31, 0.52)',
-    textLine: 'rgba(18, 22, 31, 0.2)',
+    text: "rgba(18, 22, 31, 0.86)",
+    textMuted: "rgba(18, 22, 31, 0.52)",
+    textLine: "rgba(18, 22, 31, 0.2)",
     shadow: 0x151923,
     shadowOpacity: 0.16,
     highlightOpacity: 0.38,
@@ -81,9 +81,9 @@ const THEME_COLORS = {
     keyIntensity: 2.2,
     accentIntensity: 2.55,
     rimIntensity: 2.05,
-    text: 'rgba(244, 247, 250, 0.9)',
-    textMuted: 'rgba(244, 247, 250, 0.56)',
-    textLine: 'rgba(244, 247, 250, 0.24)',
+    text: "rgba(244, 247, 250, 0.9)",
+    textMuted: "rgba(244, 247, 250, 0.56)",
+    textLine: "rgba(244, 247, 250, 0.24)",
     shadow: 0x000000,
     shadowOpacity: 0.38,
     highlightOpacity: 0.5,
@@ -94,7 +94,12 @@ const THEME_COLORS = {
 export class PortfolioScene {
   private readonly canvas: HTMLCanvasElement;
   private readonly scene = new THREE.Scene();
-  private readonly camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+  private readonly camera = new THREE.PerspectiveCamera(
+    38,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
   private readonly renderer: THREE.WebGLRenderer;
   private readonly environmentTexture: THREE.CubeTexture;
   private readonly cardGroup = new THREE.Group();
@@ -116,7 +121,10 @@ export class PortfolioScene {
     clearcoat: 0.7,
     clearcoatRoughness: 0.14,
   });
-  private readonly edgeMaterial = new THREE.LineBasicMaterial({ transparent: true, opacity: 0.28 });
+  private readonly edgeMaterial = new THREE.LineBasicMaterial({
+    transparent: true,
+    opacity: 0.28,
+  });
   private readonly particleMaterial = new THREE.PointsMaterial({
     size: 0.018,
     sizeAttenuation: true,
@@ -159,7 +167,7 @@ export class PortfolioScene {
       canvas,
       antialias: true,
       alpha: true,
-      powerPreference: 'high-performance',
+      powerPreference: "high-performance",
     });
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -176,8 +184,10 @@ export class PortfolioScene {
     this.applyTheme(initialTheme);
     this.handleResize();
 
-    window.addEventListener('resize', this.handleResize);
-    window.addEventListener('pointermove', this.handlePointerMove, { passive: true });
+    window.addEventListener("resize", this.handleResize);
+    window.addEventListener("pointermove", this.handlePointerMove, {
+      passive: true,
+    });
   }
 
   start(): void {
@@ -186,8 +196,8 @@ export class PortfolioScene {
 
   destroy(): void {
     cancelAnimationFrame(this.frameId);
-    window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('pointermove', this.handlePointerMove);
+    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("pointermove", this.handlePointerMove);
     this.disposeSceneResources();
     this.renderer.dispose();
   }
@@ -222,7 +232,11 @@ export class PortfolioScene {
   }
 
   private createCard(): void {
-    const cardShape = this.createRoundedRectShape(CARD_WIDTH, CARD_HEIGHT, CARD_RADIUS);
+    const cardShape = this.createRoundedRectShape(
+      CARD_WIDTH,
+      CARD_HEIGHT,
+      CARD_RADIUS
+    );
     const glassGeometry = new THREE.ExtrudeGeometry(cardShape, {
       depth: CARD_DEPTH,
       bevelEnabled: true,
@@ -240,7 +254,7 @@ export class PortfolioScene {
       CARD_WIDTH - 0.34,
       CARD_HEIGHT - 0.34,
       CARD_RADIUS + 0.02,
-      CARD_RADIUS * 0.62,
+      CARD_RADIUS * 0.62
     );
     const frameGeometry = new THREE.ExtrudeGeometry(frameShape, {
       depth: 0.046,
@@ -255,10 +269,22 @@ export class PortfolioScene {
 
     const glass = new THREE.Mesh(glassGeometry, this.glassMaterial);
     const frame = new THREE.Mesh(frameGeometry, this.frameMaterial);
-    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(glassGeometry, 18), this.edgeMaterial);
-    const highlight = new THREE.Mesh(new THREE.PlaneGeometry(CARD_WIDTH - 0.42, CARD_HEIGHT - 0.42), this.highlightMaterial);
-    const text = new THREE.Mesh(new THREE.PlaneGeometry(CARD_WIDTH - 0.64, CARD_HEIGHT - 0.84), this.textMaterial);
-    const shadow = new THREE.Mesh(new THREE.PlaneGeometry(CARD_WIDTH + 0.94, CARD_HEIGHT + 1.02), this.shadowMaterial);
+    const edges = new THREE.LineSegments(
+      new THREE.EdgesGeometry(glassGeometry, 18),
+      this.edgeMaterial
+    );
+    const highlight = new THREE.Mesh(
+      new THREE.PlaneGeometry(CARD_WIDTH - 0.42, CARD_HEIGHT - 0.42),
+      this.highlightMaterial
+    );
+    const text = new THREE.Mesh(
+      new THREE.PlaneGeometry(CARD_WIDTH - 0.64, CARD_HEIGHT - 0.84),
+      this.textMaterial
+    );
+    const shadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(CARD_WIDTH + 0.94, CARD_HEIGHT + 1.02),
+      this.shadowMaterial
+    );
 
     frame.position.z = CARD_DEPTH / 2 + 0.018;
     edges.position.z = 0.004;
@@ -284,46 +310,79 @@ export class PortfolioScene {
     this.scene.add(this.cardGroup);
   }
 
-  private createTextTexture(title: string, subtitle: string, palette: ScenePalette): THREE.CanvasTexture {
-    const canvas = document.createElement('canvas');
+  private createTextTexture(
+    title: string,
+    subtitle: string,
+    palette: ScenePalette
+  ): THREE.CanvasTexture {
+    const canvas = document.createElement("canvas");
     canvas.width = 1024;
     canvas.height = 1400;
 
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     if (!context) {
-      throw new Error('Failed to create text texture context.');
+      throw new Error("Failed to create text texture context.");
     }
 
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.textBaseline = 'alphabetic';
+    context.textBaseline = "alphabetic";
+    context.textAlign = "center";
+
+    const contentWidth = 760;
+    const contentCenterX = canvas.width / 2;
+    const contentLeft = contentCenterX - contentWidth / 2;
 
     context.fillStyle = palette.textMuted;
-    context.font = '700 52px Inter, Arial, sans-serif';
-    context.fillText(subtitle, 132, 208);
+    context.font = this.createFittedFont(
+      context,
+      subtitle,
+      700,
+      52,
+      contentWidth
+    );
+    context.fillText(subtitle, contentCenterX, 208);
 
     const titleGradient = context.createLinearGradient(128, 430, 820, 760);
     titleGradient.addColorStop(0, palette.text);
     titleGradient.addColorStop(0.58, palette.text);
     titleGradient.addColorStop(1, palette.textMuted);
     context.fillStyle = titleGradient;
-    context.font = '900 344px Inter, Arial, sans-serif';
-    context.fillText(title, 126, 750);
+    context.font = this.createFittedFont(
+      context,
+      title,
+      900,
+      344,
+      contentWidth
+    );
+    context.fillText(title, contentCenterX, 750);
 
     context.strokeStyle = palette.textLine;
     context.lineWidth = 5;
     context.beginPath();
-    context.moveTo(132, 996);
-    context.lineTo(892, 996);
+    context.moveTo(contentLeft, 996);
+    context.lineTo(contentLeft + contentWidth, 996);
     context.stroke();
 
     context.fillStyle = palette.textMuted;
-    context.font = '600 46px Inter, Arial, sans-serif';
-    context.fillText('Frontend Developer', 132, 1110);
-    context.fillText('안녕하세용ㅎ', 132, 1184);
+    context.font = this.createFittedFont(
+      context,
+      "Frontend Developer",
+      600,
+      46,
+      contentWidth
+    );
+    context.fillText("Frontend Developer", contentCenterX, 1110);
+    context.font = this.createFittedFont(
+      context,
+      "안녕하세요 개발자 이준영입니다",
+      600,
+      46,
+      contentWidth
+    );
+    context.fillText("안녕하세요 개발자 이준영입니다", contentCenterX, 1184);
 
     context.fillStyle = palette.textLine;
-    context.fillRect(132, 1268, 188, 8);
-    context.fillRect(344, 1268, 104, 8);
+    context.fillRect(contentCenterX - 300, 1268, 600, 8);
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
@@ -331,30 +390,58 @@ export class PortfolioScene {
     return texture;
   }
 
+  private createFittedFont(
+    context: CanvasRenderingContext2D,
+    text: string,
+    weight: number,
+    initialSize: number,
+    maxWidth: number
+  ): string {
+    let fontSize = initialSize;
+
+    while (fontSize > 24) {
+      const font = `${weight} ${fontSize}px Inter, Arial, sans-serif`;
+      context.font = font;
+
+      if (context.measureText(text).width <= maxWidth) {
+        return font;
+      }
+
+      fontSize -= 4;
+    }
+
+    return `${weight} 24px Inter, Arial, sans-serif`;
+  }
+
   private createHighlightTexture(): THREE.CanvasTexture {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = 1024;
     canvas.height = 1400;
 
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     if (!context) {
-      throw new Error('Failed to create highlight texture context.');
+      throw new Error("Failed to create highlight texture context.");
     }
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    const diagonal = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-    diagonal.addColorStop(0, 'rgba(255, 255, 255, 0)');
-    diagonal.addColorStop(0.22, 'rgba(255, 255, 255, 0.16)');
-    diagonal.addColorStop(0.38, 'rgba(255, 255, 255, 0)');
-    diagonal.addColorStop(0.62, 'rgba(255, 255, 255, 0.11)');
-    diagonal.addColorStop(0.78, 'rgba(255, 255, 255, 0)');
+    const diagonal = context.createLinearGradient(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+    diagonal.addColorStop(0, "rgba(255, 255, 255, 0)");
+    diagonal.addColorStop(0.22, "rgba(255, 255, 255, 0.16)");
+    diagonal.addColorStop(0.38, "rgba(255, 255, 255, 0)");
+    diagonal.addColorStop(0.62, "rgba(255, 255, 255, 0.11)");
+    diagonal.addColorStop(0.78, "rgba(255, 255, 255, 0)");
     context.fillStyle = diagonal;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     const topEdge = context.createLinearGradient(0, 0, 0, canvas.height);
-    topEdge.addColorStop(0, 'rgba(255, 255, 255, 0.24)');
-    topEdge.addColorStop(0.18, 'rgba(255, 255, 255, 0)');
+    topEdge.addColorStop(0, "rgba(255, 255, 255, 0.24)");
+    topEdge.addColorStop(0.18, "rgba(255, 255, 255, 0)");
     context.fillStyle = topEdge;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -364,19 +451,19 @@ export class PortfolioScene {
   }
 
   private createShadowTexture(): THREE.CanvasTexture {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = 512;
     canvas.height = 512;
 
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     if (!context) {
-      throw new Error('Failed to create shadow texture context.');
+      throw new Error("Failed to create shadow texture context.");
     }
 
     const gradient = context.createRadialGradient(256, 256, 16, 256, 256, 252);
-    gradient.addColorStop(0, 'rgba(0, 0, 0, 0.72)');
-    gradient.addColorStop(0.58, 'rgba(0, 0, 0, 0.22)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    gradient.addColorStop(0, "rgba(0, 0, 0, 0.72)");
+    gradient.addColorStop(0.58, "rgba(0, 0, 0, 0.22)");
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
     context.fillStyle = gradient;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -397,7 +484,7 @@ export class PortfolioScene {
     }
 
     const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     this.particles = new THREE.Points(geometry, this.particleMaterial);
     this.scene.add(this.particles);
   }
@@ -406,27 +493,32 @@ export class PortfolioScene {
     this.keyLight.position.set(-4.2, 4.4, 5.2);
     this.accentLight.position.set(3.4, -1.4, 3.1);
     this.rimLight.position.set(3.6, 2.8, -4.2);
-    this.scene.add(this.ambientLight, this.keyLight, this.accentLight, this.rimLight);
+    this.scene.add(
+      this.ambientLight,
+      this.keyLight,
+      this.accentLight,
+      this.rimLight
+    );
   }
 
   private createStudioEnvironment(): THREE.CubeTexture {
     const faceGradients: Array<[string, string, string]> = [
-      ['#fbfdff', '#8fb5c2', '#10151e'],
-      ['#11151f', '#526071', '#eef4ff'],
-      ['#ffffff', '#d9e0ea', '#8996a8'],
-      ['#151820', '#2f3644', '#090a0d'],
-      ['#f8fbff', '#8ddfd2', '#171b25'],
-      ['#12151f', '#a79bea', '#f7fafc'],
+      ["#fbfdff", "#8fb5c2", "#10151e"],
+      ["#11151f", "#526071", "#eef4ff"],
+      ["#ffffff", "#d9e0ea", "#8996a8"],
+      ["#151820", "#2f3644", "#090a0d"],
+      ["#f8fbff", "#8ddfd2", "#171b25"],
+      ["#12151f", "#a79bea", "#f7fafc"],
     ];
 
     const faces = faceGradients.map(([start, middle, end]) => {
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       canvas.width = 128;
       canvas.height = 128;
 
-      const context = canvas.getContext('2d');
+      const context = canvas.getContext("2d");
       if (!context) {
-        throw new Error('Failed to create environment texture context.');
+        throw new Error("Failed to create environment texture context.");
       }
 
       const gradient = context.createLinearGradient(0, 0, 128, 128);
@@ -436,7 +528,7 @@ export class PortfolioScene {
       context.fillStyle = gradient;
       context.fillRect(0, 0, 128, 128);
 
-      context.fillStyle = 'rgba(255, 255, 255, 0.18)';
+      context.fillStyle = "rgba(255, 255, 255, 0.18)";
       context.fillRect(18, 0, 18, 128);
       return canvas;
     });
@@ -453,26 +545,43 @@ export class PortfolioScene {
     innerWidth: number,
     innerHeight: number,
     radius: number,
-    innerRadius: number,
+    innerRadius: number
   ): THREE.Shape {
     const shape = this.createRoundedRectShape(width, height, radius);
-    shape.holes.push(this.createRoundedRectPath(innerWidth, innerHeight, innerRadius, true));
+    shape.holes.push(
+      this.createRoundedRectPath(innerWidth, innerHeight, innerRadius, true)
+    );
     return shape;
   }
 
-  private createRoundedRectShape(width: number, height: number, radius: number): THREE.Shape {
+  private createRoundedRectShape(
+    width: number,
+    height: number,
+    radius: number
+  ): THREE.Shape {
     const shape = new THREE.Shape();
     this.drawRoundedRectPath(shape, width, height, radius, false);
     return shape;
   }
 
-  private createRoundedRectPath(width: number, height: number, radius: number, clockwise: boolean): THREE.Path {
+  private createRoundedRectPath(
+    width: number,
+    height: number,
+    radius: number,
+    clockwise: boolean
+  ): THREE.Path {
     const path = new THREE.Path();
     this.drawRoundedRectPath(path, width, height, radius, clockwise);
     return path;
   }
 
-  private drawRoundedRectPath(path: THREE.Path, width: number, height: number, radius: number, clockwise: boolean): void {
+  private drawRoundedRectPath(
+    path: THREE.Path,
+    width: number,
+    height: number,
+    radius: number,
+    clockwise: boolean
+  ): void {
     const x = -width / 2;
     const y = -height / 2;
     const right = width / 2;
@@ -505,7 +614,11 @@ export class PortfolioScene {
 
   private replaceTextTexture(colors: ScenePalette): void {
     const previousTexture = this.textMaterial.map;
-    this.textMaterial.map = this.createTextTexture('JY', 'PORTFOLIO', colors);
+    this.textMaterial.map = this.createTextTexture(
+      "Given",
+      "HELLO WORLD!",
+      colors
+    );
     this.textMaterial.needsUpdate = true;
     previousTexture?.dispose();
   }
@@ -542,14 +655,22 @@ export class PortfolioScene {
     const elapsed = this.clock.getElapsedTime();
     const baseRotationY = this.isMobile ? -0.18 : -0.34;
     const baseRotationX = this.isMobile ? -0.04 : -0.08;
-    const targetRotationY = baseRotationY + this.pointer.x * (this.isMobile ? 0.16 : 0.24);
-    const targetRotationX = baseRotationX - this.pointer.y * (this.isMobile ? 0.11 : 0.18);
+    const targetRotationY =
+      baseRotationY + this.pointer.x * (this.isMobile ? 0.16 : 0.24);
+    const targetRotationX =
+      baseRotationX - this.pointer.y * (this.isMobile ? 0.11 : 0.18);
 
-    this.cardGroup.rotation.y += (targetRotationY - this.cardGroup.rotation.y) * 0.065;
-    this.cardGroup.rotation.x += (targetRotationX - this.cardGroup.rotation.x) * 0.065;
-    this.cardGroup.rotation.z = Math.sin(elapsed * 0.52) * (this.isMobile ? 0.024 : 0.035);
+    this.cardGroup.rotation.y +=
+      (targetRotationY - this.cardGroup.rotation.y) * 0.065;
+    this.cardGroup.rotation.x +=
+      (targetRotationX - this.cardGroup.rotation.x) * 0.065;
+    this.cardGroup.rotation.z =
+      Math.sin(elapsed * 0.52) * (this.isMobile ? 0.024 : 0.035);
     this.cardGroup.position.y +=
-      (Math.sin(elapsed * 0.72) * (this.isMobile ? 0.055 : 0.08) + this.baseCardY - this.cardGroup.position.y) * 0.025;
+      (Math.sin(elapsed * 0.72) * (this.isMobile ? 0.055 : 0.08) +
+        this.baseCardY -
+        this.cardGroup.position.y) *
+      0.025;
 
     if (this.particles) {
       this.particles.rotation.y = elapsed * 0.012 + this.pointer.x * 0.018;
@@ -563,7 +684,11 @@ export class PortfolioScene {
 
   private disposeSceneResources(): void {
     this.scene.traverse((object: THREE.Object3D) => {
-      if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.LineSegments) {
+      if (
+        object instanceof THREE.Mesh ||
+        object instanceof THREE.Points ||
+        object instanceof THREE.LineSegments
+      ) {
         object.geometry.dispose();
       }
     });

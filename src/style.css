@@ -112,14 +112,21 @@ body::before {
 }
 
 .brand {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--panel);
-  color: var(--text);
-  font-size: 0.86rem;
-  font-weight: 800;
-  letter-spacing: 0;
+  width: min(120px, 32vw);
+  min-width: 92px;
+  height: auto;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--button-bg);
+  line-height: 0;
+}
+
+.brand__logo {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .theme-toggle {
@@ -211,7 +218,6 @@ h1 {
 
 .theme-toggle:hover,
 .brand:hover {
-  background: var(--panel-hover);
   transform: translateY(-2px);
 }
 

@@ -1,32 +1,113 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="프론트엔드 개발자 준영의 사이트에 오신 것을 환영합니다." />
+    <meta
+      name="description"
+      content="프론트엔드 개발자 준영의 사이트에 오신 것을 환영합니다."
+    />
     <title>개발자 준영 | GIVEN LOG</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-icon-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
     <canvas id="webgl" aria-hidden="true"></canvas>
 
     <main class="page-shell">
       <header class="top-bar">
-        <a class="brand" href="#" aria-label="Home">JY</a>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <a class="brand" href="#" aria-label="HOME">
+          <svg
+            class="brand__logo"
+            width="558"
+            height="177"
+            viewBox="0 0 558 177"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M60.4801 143.36C48.8535 143.36 38.4535 140.693 29.2801 135.36C20.1068 130.027 12.9068 122.72 7.68012 113.44C2.56012 104.053 0.000117421 93.5467 0.000117421 81.92C0.000117421 70.6133 2.61345 60.4267 7.84012 51.36C13.0668 42.2933 20.3201 35.2 29.6001 30.08C38.8801 24.96 49.3335 22.4 60.9601 22.4C67.2535 22.4 72.9068 22.9867 77.9201 24.16C83.0401 25.2267 87.2001 26.5067 90.4001 28C93.6001 29.3867 95.7868 30.6133 96.9601 31.68L89.9201 46.72C83.3068 41.3867 73.5468 38.72 60.6401 38.72C52.1068 38.72 44.6935 40.5867 38.4001 44.32C32.1068 48.0533 27.3068 53.12 24.0001 59.52C20.6935 65.92 19.0401 73.0667 19.0401 80.96C19.0401 89.92 20.8001 97.92 24.3201 104.96C27.9468 112 32.9068 117.493 39.2001 121.44C45.6001 125.28 52.8001 127.2 60.8001 127.2C65.8135 127.2 70.6135 126.613 75.2001 125.44C79.7868 124.16 83.6801 122.187 86.8801 119.52V96.8H62.7201V80.32H104.64V126.4C100.8 131.2 94.9868 135.253 87.2001 138.56C79.5201 141.76 70.6135 143.36 60.4801 143.36ZM126.743 24.16H144.663V141.76H126.743V24.16ZM156.654 24.16H176.974L212.174 104.96L247.534 24.16H267.694L213.454 141.76H211.054L156.654 24.16ZM277.471 24.16H328.991V39.84H295.231V72.32H322.431V88.32H295.231V125.92H334.271V141.76H277.471V24.16ZM369.759 65.6L370.239 78.4V141.76H352.319V24H354.559L423.679 101.12L423.039 87.68V24.16H440.959V141.76H438.559L369.759 65.6ZM475.513 89.28C472.313 89.28 469.593 88.2133 467.353 86.08C465.113 83.84 463.993 81.12 463.993 77.92C463.993 74.6133 465.059 71.8933 467.193 69.76C469.433 67.52 472.206 66.4 475.513 66.4C478.819 66.4 481.539 67.52 483.673 69.76C485.913 71.8933 487.033 74.6133 487.033 77.92C487.033 81.12 485.913 83.84 483.673 86.08C481.539 88.2133 478.819 89.28 475.513 89.28ZM475.513 143.36C472.313 143.36 469.593 142.293 467.353 140.16C465.113 137.92 463.993 135.2 463.993 132C463.993 128.693 465.059 125.973 467.193 123.84C469.433 121.6 472.206 120.48 475.513 120.48C478.819 120.48 481.539 121.6 483.673 123.84C485.913 125.973 487.033 128.693 487.033 132C487.033 135.2 485.913 137.92 483.673 140.16C481.539 142.293 478.819 143.36 475.513 143.36ZM507.888 166.08C513.114 162.24 518.288 156.693 523.408 149.44C528.634 142.293 533.008 133.493 536.528 123.04C540.048 112.587 541.808 101.013 541.808 88.32C541.808 75.6267 539.994 64.0533 536.368 53.6C532.848 43.04 528.474 34.1867 523.248 27.04C518.128 19.7867 513.008 14.2933 507.888 10.56L517.168 3.8147e-06C521.328 2.13334 526.608 7.04 533.008 14.72C539.408 22.2933 545.168 32.4267 550.288 45.12C555.408 57.8133 557.968 72.2133 557.968 88.32C557.968 104.427 555.408 118.827 550.288 131.52C545.168 144.213 539.354 154.347 532.848 161.92C526.448 169.6 521.221 174.453 517.168 176.48L507.888 166.08Z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
+        <button
+          id="theme-toggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+        >
           <span class="theme-toggle__icon">☾</span>
         </button>
       </header>
 
       <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">Frontend Developer</p>
+        <p class="eyebrow">INTRODUCE BY</p>
         <h1 id="hero-title">Junyoung Lee</h1>
         <p class="description">
-          Building clean, interactive web experiences with TypeScript, 3D interaction, and thoughtful UI engineering.
+          Building scalable web experiences with TypeScript, React, and Next.js,
+          Building fast, scalable web experiences with a focus on SSR,
+          performance, and thoughtful UI engineering.
         </p>
 
         <nav class="links" aria-label="External links">
-          <a class="link-button" href="https://portfolio.given-log.com" target="_blank" rel="noreferrer">Portfolio</a>
-          <a class="link-button link-button--ghost" href="https://blog.given-log.com" target="_blank" rel="noreferrer">Blog</a>
+          <a
+            class="link-button"
+            href="https://portfolio.given-log.com"
+            target="_blank"
+            rel="noreferrer"
+            >Portfolio</a
+          >
+          <a
+            class="link-button link-button--ghost"
+            href="https://blog.given-log.com"
+            target="_blank"
+            rel="noreferrer"
+            >Blog</a
+          >
         </nav>
       </section>
     </main>
