@@ -7,7 +7,8 @@ A single-page, responsive 3D portfolio landing page built with Vite, TypeScript,
 - Minimal one-page layout
 - Responsive design
 - Dark mode toggle with localStorage persistence
-- Three.js floating 3D name card
+- Glass and metal themed Three.js floating 3D name card
+- Beveled card geometry with metallic frame, glass highlight, soft shadow, and studio-style reflections
 - Mouse / pointer based tilt interaction
 - Lightweight particle field background
 - Two external links: Portfolio and Blog

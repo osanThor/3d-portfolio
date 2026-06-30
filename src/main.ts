@@ -19,6 +19,8 @@ scene.start();
 function syncThemeIcon(theme: Theme): void {
   if (!themeIcon) return;
   themeIcon.textContent = theme === 'dark' ? '☀' : '☾';
+  themeToggle?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  themeToggle?.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
 }
 
 syncThemeIcon(currentTheme);
