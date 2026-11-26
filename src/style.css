@@ -10,8 +10,6 @@
   --line: rgba(20, 24, 32, 0.14);
   --button-bg: #151923;
   --button-text: #ffffff;
-  --button-ghost-bg: rgba(255, 255, 255, 0.42);
-  --button-ghost-hover: rgba(255, 255, 255, 0.68);
   --shadow: 0 24px 80px rgba(31, 38, 52, 0.12);
   --focus-ring: rgba(48, 154, 137, 0.44);
 }
@@ -28,8 +26,6 @@
   --line: rgba(255, 255, 255, 0.13);
   --button-bg: #f4f1ea;
   --button-text: #08090d;
-  --button-ghost-bg: rgba(255, 255, 255, 0.08);
-  --button-ghost-hover: rgba(255, 255, 255, 0.14);
   --shadow: 0 28px 92px rgba(0, 0, 0, 0.36);
   --focus-ring: rgba(53, 215, 194, 0.48);
 }
@@ -268,17 +264,8 @@ h1 {
     border-color 180ms ease;
 }
 
-.link-button--ghost {
-  background: var(--button-ghost-bg);
-  color: var(--text);
-}
-
 .link-button:hover {
   transform: translateY(-2px);
-}
-
-.link-button--ghost:hover {
-  background: var(--button-ghost-hover);
 }
 
 .theme-toggle:hover,
